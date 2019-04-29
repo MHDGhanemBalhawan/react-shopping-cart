@@ -6,7 +6,12 @@ export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: 0
+      total: 0,
+      ProductList: [
+        { name: "Android", price: 111 },
+        { name: "Apple", price: 222 },
+        { name: "Samsung", price: 55 }
+      ]
     };
   }
   calculateTotal = price => {
@@ -16,26 +21,22 @@ export default class ProductList extends React.Component {
     alert("You selected " + name);
   };
   render() {
+    const products = this.state.ProductList.map(product => {
+      return (
+        <div>
+          <Product
+            name={product.name}
+            price={product.price}
+            handleShow={this.showProduct}
+            handleTotal={this.calculateTotal}
+          />
+        </div>
+      );
+    });
     return (
       <div>
-        <Product
-          name="Android"
-          price={111}
-          handleShow={this.showProduct}
-          handleTotal={this.calculateTotal}
-        />
-        <Product
-          name="IPhone"
-          price={222}
-          handleShow={this.showProduct}
-          handleTotal={this.calculateTotal}
-        />
-        <Product
-          name="Nokia"
-          price={55}
-          handleShow={this.showProduct}
-          handleTotal={this.calculateTotal}
-        />
+        {products}
+
         <Total total={this.state.total} />
       </div>
     );
