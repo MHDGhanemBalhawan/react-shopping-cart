@@ -1,6 +1,7 @@
 import React from "react";
 import Product from "./Product";
 import Total from "./Total";
+import ProductForm from "./ProductForm";
 
 export default class ProductList extends React.Component {
   constructor(props) {
@@ -14,12 +15,19 @@ export default class ProductList extends React.Component {
       ]
     };
   }
+
+  createProduct = product => {
+    this.setState({
+      ProductList: this.state.ProductList.concat(product)
+    });
+  };
   calculateTotal = price => {
     this.setState({ total: this.state.total + price });
   };
   showProduct = name => {
     alert("You selected " + name);
   };
+
   render() {
     const products = this.state.ProductList.map(product => {
       return (
@@ -35,6 +43,7 @@ export default class ProductList extends React.Component {
     });
     return (
       <div>
+        <ProductForm handleCreate={this.createProduct} />
         {products}
 
         <Total total={this.state.total} />
