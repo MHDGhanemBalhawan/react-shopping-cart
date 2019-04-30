@@ -31,14 +31,16 @@ export default class ProductList extends React.Component {
   render() {
     const products = this.state.ProductList.map(product => {
       return (
-        <div>
-          <Product
-            name={product.name}
-            price={product.price}
-            handleShow={this.showProduct}
-            handleTotal={this.calculateTotal}
-          />
-        </div>
+        <ul key={product.name}>
+          <li>
+            <Product
+              name={product.name}
+              price={product.price}
+              handleShow={this.showProduct}
+              handleTotal={this.calculateTotal}
+            />
+          </li>
+        </ul>
       );
     });
     return (
